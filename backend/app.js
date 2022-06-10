@@ -34,402 +34,402 @@ const eda51 = "COLETOR DE DADOS HONEYWELL EDA51 ANDROID , 2D , WIFI , BLUETOOTH 
 //#endregion
 
 //#region Modelo Impressoras
-    const impressoaS4M = "IMPRESSORA TERMICA ZEBRA S4M 203 DPI C/ USB , PARALELO , SERIAL";
-    const impressoraZT230 = "IMPRESSORA TÉRMICA ZEBRA ZT230 - 203 DPI";
-    const impressora110XI3 = "IMPRESSORA TÉRMICA ZEBRA 110XiIII";
-    const impressora110XI4 = "IMPRESSORA TÉRMICA ZEBRA 110XI4";
-    const impressoraAgorxOS214 = "IMPRESSORA TÉRMICA ARGOX OS-214 PLUS";
-    const impressoraGC420T = "IMPRESSORA TERMICA ZEBRA GC420T";
+const impressoaS4M = "IMPRESSORA TERMICA ZEBRA S4M 203 DPI C/ USB , PARALELO , SERIAL";
+const impressoraZT230 = "IMPRESSORA TÉRMICA ZEBRA ZT230 - 203 DPI";
+const impressora110XI3 = "IMPRESSORA TÉRMICA ZEBRA 110XiIII";
+const impressora110XI4 = "IMPRESSORA TÉRMICA ZEBRA 110XI4";
+const impressoraAgorxOS214 = "IMPRESSORA TÉRMICA ARGOX OS-214 PLUS";
+const impressoraGC420T = "IMPRESSORA TERMICA ZEBRA GC420T";
 
 //#endregion
 
 //#region Modelo Leitores
-    const baseLS3578 = "BASE DO LEITOR DE DADOS SYMBOL LS3578";
-    const leitorDS3578 = "LEITOR DE DADOS MOTOROLA DS3578";
-    const leitorLS3578 = "LEITOR DE DADOS MOTOROLA LS3578";
-    const leitorLS2208 = "LEITOR DE DADOS MOTOROLA LS2208";
-    const leitorLI4278 = "LEITOR DE DADOS MOTOROLA LI4278 BLUETOOTH";
-    const leitorLS3408b = "LEITOR DE DADOS MOTOROLA LS3408 COM BASE";
-    const leitorLS3408u = "LEITOR DE DADOS MOTOROLA LS3408 USB";
-    const leitorDatalogicGD4430 = "LEITOR DE DADOS 2D DATALOGIC GRYPHON GD4430 USB";
-    const leitorDatalogicGM4400 = "LEITOR DE DADOS 2D DATALOGIC GRYPHON GM4400 BLUETOOTH";
-    const leitorHoneyVoy1202G = "LEITOR DE DADOS HONEYWELL VOYAGER 1202G";
-    const leitorCompexH100 = "LEITOR DE DADOS COMPEX CPX-HR100";
-    const leitorDS2278 = "LEITOR DE CODIGO DE BARRAS SYMBOL DS2278";
-    const leitorDS2278b = "BASE DO LEITOR ZEBRA DS2278";
+const baseLS3578 = "BASE DO LEITOR DE DADOS SYMBOL LS3578";
+const leitorDS3578 = "LEITOR DE DADOS MOTOROLA DS3578";
+const leitorLS3578 = "LEITOR DE DADOS MOTOROLA LS3578";
+const leitorLS2208 = "LEITOR DE DADOS MOTOROLA LS2208";
+const leitorLI4278 = "LEITOR DE DADOS MOTOROLA LI4278 BLUETOOTH";
+const leitorLS3408b = "LEITOR DE DADOS MOTOROLA LS3408 COM BASE";
+const leitorLS3408u = "LEITOR DE DADOS MOTOROLA LS3408 USB";
+const leitorDatalogicGD4430 = "LEITOR DE DADOS 2D DATALOGIC GRYPHON GD4430 USB";
+const leitorDatalogicGM4400 = "LEITOR DE DADOS 2D DATALOGIC GRYPHON GM4400 BLUETOOTH";
+const leitorHoneyVoy1202G = "LEITOR DE DADOS HONEYWELL VOYAGER 1202G";
+const leitorCompexH100 = "LEITOR DE DADOS COMPEX CPX-HR100";
+const leitorDS2278 = "LEITOR DE CODIGO DE BARRAS SYMBOL DS2278";
+const leitorDS2278b = "BASE DO LEITOR ZEBRA DS2278";
 //#endregion
 
 //#endregion
 
 //#region Api Coletores
 app.get('/coletores/:estagio', async (req, res) => {
-        const estagioReq  = req.params.estagio; 
-        const data = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
-        const coletores = data.data;
-        let dadosColetores = { dado: [] };
-        await formataData(coletores);
+    const estagioReq = req.params.estagio;
+    const data = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+    const coletores = data.data;
+    let dadosColetores = { dado: [] };
+    await formataData(coletores);
 
-        for (let i = 0; i < coletores.length; i++) {
-            let descricao = coletores[i].DescricaoTipoOS;
-            let Equipamento = coletores[i].NomeEquipamento;
-            if ((descricao === tipoOSContrato) && (Equipamento == skorpioX3)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9090wb5C)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9090wb5L)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9090brik)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9090ce5C)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9090ce5L)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9190ce6C)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9190ce6L)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == motorola9190wm65C)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == eda50)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == eda50k)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == eda51)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == skorpio)) {
-                dadosColetores.dado.push({
-                    OS: coletores[i].OSID,
-                    Data: coletores[i].OSData,
-                    Cliente: coletores[i].PessoaFantasia,
-                    Equipamento: coletores[i].NomeEquipamento,
-                    NS: coletores[i].EquipamentoLTS,
-                    Data_Move: coletores[i].DataFinalMovto
-                })
-            }
-        }    
+    for (let i = 0; i < coletores.length; i++) {
+        let descricao = coletores[i].DescricaoTipoOS;
+        let Equipamento = coletores[i].NomeEquipamento;
+        if ((descricao === tipoOSContrato) && (Equipamento == skorpioX3)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9090wb5C)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9090wb5L)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9090brik)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9090ce5C)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9090ce5L)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9190ce6C)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9190ce6L)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == motorola9190wm65C)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == eda50)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == eda50k)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == eda51)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == skorpio)) {
+            dadosColetores.dado.push({
+                OS: coletores[i].OSID,
+                Data: coletores[i].OSData,
+                Cliente: coletores[i].PessoaFantasia,
+                Equipamento: coletores[i].NomeEquipamento,
+                NS: coletores[i].EquipamentoLTS,
+                Data_Move: coletores[i].DataFinalMovto
+            })
+        }
+    }
     res.json(dadosColetores.dado);
 })
 //#endregion
 
 //#region Api Impressoras
-    app.get('/impressoras/:estagio', async (req, res) => {
-        const estagioReq = req.params.estagio;
-        const dataImp = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
-        const impressoras = dataImp.data;
-        let dadosImpressoras = { dado: [] };
-        await formataData(impressoras);
+app.get('/impressoras/:estagio', async (req, res) => {
+    const estagioReq = req.params.estagio;
+    const dataImp = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+    const impressoras = dataImp.data;
+    let dadosImpressoras = { dado: [] };
+    await formataData(impressoras);
 
-        for (let i = 0; i < impressoras.length; i++) {
-            let descricao = impressoras[i].DescricaoTipoOS;
-            let Equipamento = impressoras[i].NomeEquipamento;
-            if ((descricao === tipoOSContrato) && (Equipamento == impressoaS4M)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == impressoraZT230)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == impressora110XI3)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == impressora110XI4)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == impressoraAgorxOS214)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == impressoraGC420T)) {
-                dadosImpressoras.dado.push({
-                    OS: impressoras[i].OSID,
-                    Data: impressoras[i].OSData,
-                    Cliente: impressoras[i].PessoaFantasia,
-                    Equipamento: impressoras[i].NomeEquipamento,
-                    NS: impressoras[i].EquipamentoLTS,
-                    Data_Move: impressoras[i].DataFinalMovto
-                })
-            }
+    for (let i = 0; i < impressoras.length; i++) {
+        let descricao = impressoras[i].DescricaoTipoOS;
+        let Equipamento = impressoras[i].NomeEquipamento;
+        if ((descricao === tipoOSContrato) && (Equipamento == impressoaS4M)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
         }
+        if ((descricao === tipoOSContrato) && (Equipamento == impressoraZT230)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == impressora110XI3)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == impressora110XI4)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == impressoraAgorxOS214)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == impressoraGC420T)) {
+            dadosImpressoras.dado.push({
+                OS: impressoras[i].OSID,
+                Data: impressoras[i].OSData,
+                Cliente: impressoras[i].PessoaFantasia,
+                Equipamento: impressoras[i].NomeEquipamento,
+                NS: impressoras[i].EquipamentoLTS,
+                Data_Move: impressoras[i].DataFinalMovto
+            })
+        }
+    }
 
-        res.json(dadosImpressoras.dado)
-    })
+    res.json(dadosImpressoras.dado)
+})
 
 //#endregion
 
 //#region Api Leitores
-    app.get('/leitores/:estagio', async(req, res) => {
-        const estagioReq = req.params.estagio;
-        const dataLeitor = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
-        const leitores = dataLeitor.data;
-        let dadosLeitores = { dado : [] };
-        await formataData(leitores);
+app.get('/leitores/:estagio', async (req, res) => {
+    const estagioReq = req.params.estagio;
+    const dataLeitor = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+    const leitores = dataLeitor.data;
+    let dadosLeitores = { dado: [] };
+    await formataData(leitores);
 
-        for (let i = 0; i < leitores.length; i++) {
-            let descricao = leitores[i].DescricaoTipoOS;
-            let Equipamento = leitores[i].NomeEquipamento;
-            if ((descricao === tipoOSContrato) && (Equipamento == baseLS3578)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorDS3578)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3578)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorLS2208)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorLI4278)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3408b)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3408u)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorDatalogicGD4430)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorDatalogicGM4400)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorHoneyVoy1202G)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorCompexH100)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorDS2278)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
-            if ((descricao === tipoOSContrato) && (Equipamento == leitorDS2278b)) {
-                dadosLeitores.dado.push({
-                    OS: leitores[i].OSID,
-                    Data: leitores[i].OSData,
-                    Cliente: leitores[i].PessoaFantasia,
-                    Equipamento: leitores[i].NomeEquipamento,
-                    NS: leitores[i].EquipamentoLTS,
-                    Data_Move: leitores[i].DataFinalMovto
-                })
-            }
+    for (let i = 0; i < leitores.length; i++) {
+        let descricao = leitores[i].DescricaoTipoOS;
+        let Equipamento = leitores[i].NomeEquipamento;
+        if ((descricao === tipoOSContrato) && (Equipamento == baseLS3578)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
         }
-      
-        res.send(dadosLeitores.dado)
-    })
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorDS3578)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3578)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorLS2208)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorLI4278)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3408b)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorLS3408u)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorDatalogicGD4430)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorDatalogicGM4400)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorHoneyVoy1202G)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorCompexH100)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorDS2278)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+        if ((descricao === tipoOSContrato) && (Equipamento == leitorDS2278b)) {
+            dadosLeitores.dado.push({
+                OS: leitores[i].OSID,
+                Data: leitores[i].OSData,
+                Cliente: leitores[i].PessoaFantasia,
+                Equipamento: leitores[i].NomeEquipamento,
+                NS: leitores[i].EquipamentoLTS,
+                Data_Move: leitores[i].DataFinalMovto
+            })
+        }
+    }
+
+    res.send(dadosLeitores.dado)
+})
 //#endregion
 
 //#region Servidor
@@ -460,11 +460,120 @@ formataData = async (dataItem) => {
     }
 }
 
-formataHora = async (dataHora) =>{
+formataHora = async (dataHora) => {
     for (var i = 0; i < dataHora.length; i++) {
         var data = await dataHora[i];
-        var hora = await data.DataFinalMovto.replace(/(\d*)/, )  
+        var hora = await data.DataFinalMovto.replace(/(\d*)/,)
     }
 }
+
+//#endregion
+
+//#region contagem
+
+app.get('/home/:estagio', async (req, res) => {
+
+    try {
+        const estagioReq = req.params.estagio;
+
+        //aguardando chegar na zhaz
+        if (estagioReq ==  1) {
+            const aguardandoChegar = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalAC = aguardandoChegar.data
+            const totalACB2W = valorTotal(totalAC)
+            
+            res.json(totalACB2W)
+        }
+        else 
+        //aguardando vistoria
+        if(estagioReq == 3){
+            const aguardandoVistoria = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalAV = aguardandoVistoria.data
+            const totalAVB2W = valorTotal(totalAV)
+            
+            res.json(totalAVB2W)
+        }
+        else
+        //aguardando aprovação
+        if(estagioReq == 6){
+            const aguardandoAprovacao = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);   
+            const totalAA = aguardandoAprovacao.data;
+            const totalAAB2W = valorTotal(totalAA);
+
+            res.json(totalAAB2W)
+        }
+        else
+        //aprovado
+        if (estagioReq == 8) {
+            const aprovado = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalAP = aprovado.data
+            const totalAPB2W = valorTotal(totalAP)
+            
+            res.json(totalAPB2W)
+        }
+        else
+        //em manutenção
+        if (estagioReq == 9) {
+            const emManutencao = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalEM = emManutencao.data;
+            const totalEMB2W = valorTotal(totalEM);
+
+            res.json(totalEMB2W);
+        }
+        else
+        //Manutenção Concluida
+        if (estagioReq == 11) {
+            const manutencaoConcluida = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalMC = manutencaoConcluida.data;
+            const totalMCB2W = valorTotal(totalMC);
+
+            res.json(totalMCB2W);
+        }
+        else
+        //reprovado
+        if (estagioReq == 17) {
+            const reprovado = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalRP = reprovado.data;
+            const totalRPB2W = valorTotal(totalRP);
+
+            res.json(totalRPB2W);
+        }
+        else
+        //finalizado
+        if (estagioReq == 15) {
+            const finalizado = await axios(`https://cosmoserp.com/zhaz/aWSPCosmosFBX.aspx?${key},vApiOS,${estagioReq}`);
+            const totalF = finalizado.data;
+            const totalFB2W = valorTotal(totalF);
+
+            res.json(totalFB2W);
+        }
+
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+
+})
+
+//#region função hibrida
+
+//função hibrida funciona para todos os estagios
+function valorTotal(estagio) {
+    let dadoContratoB2w = { dado: [] }
+    for (let i = 0; i < estagio.length; i++) {
+        let descricao = estagio[i].DescricaoTipoOS;
+        if (descricao === tipoOSContrato) {
+            dadoContratoB2w.dado.push({
+                OS: estagio[i].OSID,
+                Cliente: estagio[i].PessoaFantasia,
+            })
+        }
+    }
+
+    const totalContratoB2w = Object.keys(dadoContratoB2w.dado).length;
+    return totalContratoB2w
+}
+//#endregion
 
 //#endregion

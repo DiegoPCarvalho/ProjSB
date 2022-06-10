@@ -8,7 +8,7 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/home">
         <md-icon>dashboard</md-icon>
-        <p>Home</p>
+        <p>Dashboard</p>
       </sidebar-link>
       <sidebar-link to="/Coletores">
         <md-icon>games</md-icon>
